@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PixelShop — Tienda Gaming Online</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="_shared.css"/>
+  <style>
+    /* ---- HERO ---- */
+    .hero {
+      position: relative;
+      padding: 96px 0 80px;
+      overflow: hidden;
+    }
+    .hero-glow-1 {
+      position: absolute; top: -120px; left: -10%;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,229,255,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; top: -60px; right: -5%;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,45,111,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.22);
+      border-radius: 20px; padding: 6px 16px;
+      margin-bottom: 22px;
+    }
+    .hero-kicker span { width: 7px; height: 7px; background: var(--cyan); border-radius: 50%; animation: blink 1.5s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.08;
+      color: var(--text);
+      margin-bottom: 22px;
+    }
+    .hero h1 em { font-style: normal; color: var(--cyan); }
+    .hero h1 strong { font-style: normal; color: var(--pink); }
+    .hero-desc { font-size: 1.02rem; color: var(--muted); max-width: 520px; line-height: 1.7; }
+
+    .hero-stats {
+      display: flex; gap: 36px; flex-wrap: wrap; margin-top: 44px;
+    }
+    .hero-stat-num {
+      font-family: var(--font-head); font-size: 1.9rem; font-weight: 800;
+      line-height: 1;
+    }
+    .hero-stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
+
+    /* ---- GAME CARDS ---- */
+    .game-hero-card {
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--bg2);
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      display: block;
+    }
+    .game-hero-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(0,229,255,0.4);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .game-hero-card-art {
+      height: 140px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-hero-card-art::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(14,14,28,0.85) 100%);
+    }
+    .game-hero-card-body { padding: 16px 18px 20px; }
+    .game-hero-card-name {
+      font-family: var(--font-head); font-size: 1rem; font-weight: 800;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .game-hero-card-sub { font-size: 0.75rem; color: var(--muted); }
+    .game-hero-card-count {
+      font-family: var(--font-ui); font-size: 0.7rem; font-weight: 700;
+      color: var(--cyan); letter-spacing: 1px; margin-top: 10px;
+    }
+    .game-hero-card-arrow {
+      float: right; color: var(--muted); font-size: 0.75rem; margin-top: 2px;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .game-hero-card:hover .game-hero-card-arrow { transform: translateX(4px); color: var(--cyan); }
+
+    /* ---- HOW IT WORKS ---- */
+    .step-card {
+      position: relative;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px 24px;
+      height: 100%;
+    }
+    .step-num {
+      font-family: var(--font-head);
+      font-size: 3rem; font-weight: 800;
+      color: rgba(0,229,255,0.08);
+      position: absolute; top: 16px; right: 20px;
+      line-height: 1;
+    }
+    .step-icon { font-size: 1.8rem; margin-bottom: 14px; }
+    .step-title { font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .step-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    /* ---- FEATURES ---- */
+    .feature-icon-wrap {
+      width: 50px; height: 50px; border-radius: 14px;
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ---- TESTIMONIALS ---- */
+    .testimonial-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 22px;
+      height: 100%;
+    }
+    .testimonial-stars { color: var(--amber); font-size: 0.9rem; margin-bottom: 12px; }
+    .testimonial-text { font-size: 0.87rem; color: var(--muted); line-height: 1.65; font-style: italic; }
+    .testimonial-author { margin-top: 16px; font-family: var(--font-ui); font-weight: 700; font-size: 0.85rem; color: var(--text); }
+    .testimonial-game { font-size: 0.73rem; color: var(--muted); }
+
+    /* ---- CTA BANNER ---- */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(0,229,255,0.07) 0%, rgba(255,45,111,0.05) 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 56px 48px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,229,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="ps-nav"></div>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero z1">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="container">
+      <div class="row align-items-center gy-5">
+        <div class="col-lg-6 fade-up">
+          <div class="hero-kicker">
+            <span></span> Tienda Online Gaming
+          </div>
+          <h1>Cuentas y objetos<br>de <em>videojuegos</em><br>al <strong>mejor precio</strong></h1>
+          <p class="hero-desc">
+            Robux, V-Bucks, Diamonds, cuentas premium y objetos raros.
+            Todo verificado, entrega en minutos vía WhatsApp.
+          </p>
+          <div class="d-flex gap-3 mt-4 flex-wrap fade-up fade-up-2">
+            <a href="catalogo.html" class="btn-ps-primary">
+              <i class="fas fa-store"></i> Ver catálogo
+            </a>
+            <a href="contacto.html" class="btn-ps-ghost">
+              <i class="fab fa-whatsapp"></i> Contactar
+            </a>
+          </div>
+          <div class="hero-stats fade-up fade-up-3">
+            <div>
+              <div class="hero-stat-num" style="color:var(--cyan)">500+</div>
+              <div class="hero-stat-label">Clientes satisfechos</div>
+            </div>
+            <div style="width:1px;background:var(--border)"></div>
+            <div>
+              <div class="hero-stat-num" style="color:var(--pink)">5</div>
+              <div class="hero-stat-label">Juegos disponibles</div>
+            </div>
+            <div style="width:1px;background:var(--border)"></div>
+            <div>
+              <div class="hero-stat-num" style="color:var(--green)">‹30min</div>
+              <div class="hero-stat-label">Tiempo de entrega</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <!-- Floating game cards preview -->
+          <div class="row g-3 fade-up fade-up-2" id="heroGameCards"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- ============ CÓMO FUNCIONA ============ -->
+  <section class="py-5 z1" id="como-funciona">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <div class="ps-section-label">Proceso de compra</div>
+        <div class="ps-section-title">¿Cómo funciona?</div>
+        <p style="color:var(--muted);max-width:480px;margin:0 auto">Comprar es simple y rápido. En 4 pasos tienes tu producto.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3">
+          <div class="step-card fade-up fade-up-1">
+            <div class="step-num">01</div>
+            <div class="step-icon">🔍</div>
+            <div class="step-title">Elige tu producto</div>
+            <div class="step-desc">Navega el catálogo, filtra por juego y encuentra lo que buscas.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="step-card fade-up fade-up-2">
+            <div class="step-num">02</div>
+            <div class="step-icon">💬</div>
+            <div class="step-title">Escríbenos</div>
+            <div class="step-desc">Haz clic en "Comprar" y se abre WhatsApp con tu pedido ya escrito.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="step-card fade-up fade-up-3">
+            <div class="step-num">03</div>
+            <div class="step-icon">💳</div>
+            <div class="step-title">Realiza el pago</div>
+            <div class="step-desc">OXXO, transferencia SPEI, CoDi o PayPal. Te enviamos los datos al momento.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="step-card fade-up fade-up-4">
+            <div class="step-num">04</div>
+            <div class="step-icon">🚀</div>
+            <div class="step-title">Recibe tu producto</div>
+            <div class="step-desc">Entregamos en menos de 30 minutos confirmado el pago. ¡A jugar!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- ============ JUEGOS ============ -->
+  <section class="py-5 z1">
+    <div class="container py-4">
+      <div class="d-flex align-items-end justify-content-between mb-5 flex-wrap gap-3">
+        <div>
+          <div class="ps-section-label">Catálogo</div>
+          <div class="ps-section-title">Elige tu <span>juego</span></div>
+        </div>
+        <a href="catalogo.html" class="btn-ps-ghost" style="font-size:0.85rem;padding:9px 20px">
+          Ver todos <i class="fas fa-arrow-right ms-1"></i>
+        </a>
+      </div>
+      <div class="row g-4" id="gamesGrid"></div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- ============ FEATURES / POR QUÉ ELEGIRNOS ============ -->
+  <section class="py-5 z1">
+    <div class="container py-4">
+      <div class="row gy-5 align-items-center">
+        <div class="col-lg-4">
+          <div class="ps-section-label">Ventajas</div>
+          <div class="ps-section-title">¿Por qué <span>elegirnos?</span></div>
+          <p style="color:var(--muted);margin-bottom:24px">Llevamos tiempo en el mercado y sabemos lo que los gamers necesitan.</p>
+          <a href="nosotros.html" class="btn-ps-ghost" style="font-size:0.85rem;padding:9px 20px">
+            Conocer más <i class="fas fa-arrow-right ms-1"></i>
+          </a>
+        </div>
+        <div class="col-lg-8">
+          <div class="row g-3" id="featuresGrid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="py-5 z1">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <div class="ps-section-label">Reseñas</div>
+        <div class="ps-section-title">Lo que dicen nuestros <span>clientes</span></div>
+      </div>
+      <div class="row g-4" id="testimonialsGrid"></div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- ============ CTA BANNER ============ -->
+  <section class="py-5 z1">
+    <div class="container py-3">
+      <div class="cta-banner">
+        <div class="ps-section-label mb-3" style="justify-content:center;display:flex">Empieza ahora</div>
+        <div class="ps-section-title" style="font-size:clamp(1.6rem,3.5vw,2.6rem)">¿Listo para llevar tu<br>juego al siguiente nivel?</div>
+        <p style="color:var(--muted);max-width:420px;margin:12px auto 28px">Escríbenos y recibe atención personalizada. Respondemos en minutos.</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+          <a href="catalogo.html" class="btn-ps-primary"><i class="fas fa-store"></i> Ver catálogo completo</a>
+          <a id="ctaWa" href="#" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Hablar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="ps-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="data.js"></script>
+  <script src="ps.js"></script>
+  <script>
+    PS.init('home');
+
+    // Hero game cards (first 4)
+    const heroEl = document.getElementById('heroGameCards');
+    GAMES.slice(0,4).forEach((g,i) => {
+      heroEl.innerHTML += `
+        <div class="col-6">
+          <a href="catalogo.html?juego=${g.id}" class="game-hero-card fade-up fade-up-${i+1}">
+            <div class="game-hero-card-art" style="background:linear-gradient(135deg,${g.color},${g.color2})">
+              <span style="position:relative;z-index:1">${g.emoji}</span>
+            </div>
+            <div class="game-hero-card-body">
+              <div class="game-hero-card-name">${g.name} <span class="game-hero-card-arrow"><i class="fas fa-chevron-right"></i></span></div>
+              <div class="game-hero-card-sub">${g.tagline}</div>
+              <div class="game-hero-card-count">${g.categories.reduce((a,c)=>a+c.products.length,0)} productos disponibles →</div>
+            </div>
+          </a>
+        </div>`;
+    });
+
+    // All games grid
+    const gamesEl = document.getElementById('gamesGrid');
+    GAMES.forEach((g,i) => {
+      const total = g.categories.reduce((a,c)=>a+c.products.length,0);
+      gamesEl.innerHTML += `
+        <div class="col-6 col-md-4 col-lg-4">
+          <a href="catalogo.html?juego=${g.id}" class="ps-card d-block text-decoration-none p-4 fade-up fade-up-${(i%4)+1}">
+            <div style="font-size:2.6rem;margin-bottom:14px">${g.emoji}</div>
+            <div style="font-family:var(--font-head);font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:6px">${g.name}</div>
+            <div style="font-size:0.78rem;color:var(--muted);margin-bottom:14px">${g.tagline}</div>
+            <div style="font-family:var(--font-ui);font-size:0.75rem;font-weight:700;color:var(--cyan)">${total} productos →</div>
+          </a>
+        </div>`;
+    });
+
+    // Features
+    const features = [
+      { icon:'⚡', title:'Entrega rápida',     desc:'Menos de 30 minutos en la mayoría de los pedidos.' },
+      { icon:'🔒', title:'Pagos seguros',       desc:'Verificamos tu pago antes de entregar cualquier producto.' },
+      { icon:'💬', title:'Soporte real',        desc:'Atención personalizada vía WhatsApp, 7 días a la semana.' },
+      { icon:'💸', title:'Precios competitivos',desc:'Comparamos precios constantemente para que siempre ahorres.' },
+      { icon:'✅', title:'Productos verificados',desc:'Cada cuenta u objeto se verifica antes de la entrega.' },
+      { icon:'🔄', title:'Garantía de entrega', desc:'Si algo falla, lo resolvemos o te devolvemos el dinero.' },
+    ];
+    const featEl = document.getElementById('featuresGrid');
+    features.forEach((f,i) => {
+      featEl.innerHTML += `
+        <div class="col-sm-6">
+          <div class="d-flex gap-3 fade-up fade-up-${(i%4)+1}">
+            <div class="feature-icon-wrap">${f.icon}</div>
+            <div>
+              <div style="font-family:var(--font-ui);font-weight:700;font-size:0.9rem;margin-bottom:4px">${f.title}</div>
+              <div style="font-size:0.8rem;color:var(--muted)">${f.desc}</div>
+            </div>
+          </div>
+        </div>`;
+    });
+
+    // Testimonials
+    const testimonials = [
+      { text:'Compré 800 Robux y los recibí en menos de 10 minutos. El trato súper amable y el precio mejor que en cualquier otro lado.',  author:'Miguel A.',  game:'Roblox',   stars:5 },
+      { text:'Ya van 3 veces que compro cuentas de Fortnite con ellos. Siempre cumplen, te avisan si hay algún problema y solucionan rápido.',author:'Karla M.',  game:'Fortnite', stars:5 },
+      { text:'Dudé al principio pero me mandaron screenshots de todo antes de pagar. Cuenta de Valorant Platino perfecto, super recomendado.', author:'Jesús R.',  game:'Valorant', stars:5 },
+      { text:'Los Diamonds de Free Fire llegaron al instante. Súper fácil el proceso, solo mandas el ID y listo. Precio justo.', author:'Andrea L.', game:'Free Fire', stars:5 },
+    ];
+    const testEl = document.getElementById('testimonialsGrid');
+    testimonials.forEach((t,i) => {
+      testEl.innerHTML += `
+        <div class="col-md-6 col-lg-3">
+          <div class="testimonial-card fade-up fade-up-${i+1}">
+            <div class="testimonial-stars">${'★'.repeat(t.stars)}</div>
+            <div class="testimonial-text">"${t.text}"</div>
+            <div class="testimonial-author mt-3">${t.author}</div>
+            <div class="testimonial-game">${t.game}</div>
+          </div>
+        </div>`;
+    });
+
+    // CTA WA link
+    document.getElementById('ctaWa').href = PS.waLink('Hola PixelShop! Quiero información sobre sus productos 🎮');
+  </script>
+</body>
+</html>

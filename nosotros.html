@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nosotros — PixelShop</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="_shared.css"/>
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg,rgba(0,229,255,0.05),rgba(255,45,111,0.03));
+      border-bottom: 1px solid var(--border);
+      padding: 56px 0;
+    }
+    .value-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px 22px; height: 100%;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .value-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-4px); }
+    .value-icon { font-size: 2rem; margin-bottom: 14px; }
+    .value-title { font-family: var(--font-ui); font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: var(--cyan); }
+    .value-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    .stat-box {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px; text-align: center;
+    }
+    .stat-box-num {
+      font-family: var(--font-head); font-size: 2.4rem; font-weight: 800;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .stat-box-label { font-size: 0.8rem; color: var(--muted); }
+
+    .timeline-item { display: flex; gap: 20px; margin-bottom: 32px; }
+    .timeline-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--cyan); flex-shrink: 0; margin-top: 4px;
+      box-shadow: 0 0 10px rgba(0,229,255,0.5);
+    }
+    .timeline-line {
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+    }
+    .timeline-v { width: 2px; background: var(--border); flex: 1; margin-top: 4px; }
+    .timeline-title { font-family: var(--font-ui); font-weight: 700; font-size: 0.9rem; color: var(--text); margin-bottom: 4px; }
+    .timeline-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    .timeline-year { font-family: var(--font-head); font-size: 0.78rem; color: var(--cyan); margin-bottom: 4px; }
+
+    .pay-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 18px;
+      display: flex; align-items: flex-start; gap: 16px;
+      transition: border-color 0.2s;
+    }
+    .pay-card:hover { border-color: rgba(0,229,255,0.3); }
+    .pay-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 2px; }
+    .pay-name { font-family: var(--font-ui); font-weight: 700; font-size: 0.9rem; color: var(--text); margin-bottom: 4px; }
+    .pay-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div id="ps-nav"></div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero z1">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+          <li class="breadcrumb-item active">Nosotros</li>
+        </ol>
+      </nav>
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-7">
+          <div class="ps-section-label">Quiénes somos</div>
+          <div class="ps-section-title" style="margin-bottom:14px">La tienda gaming<br>en la que puedes <span>confiar</span></div>
+          <p style="color:var(--muted);max-width:520px;font-size:0.95rem;line-height:1.7">
+            Somos una tienda 100% mexicana especializada en la compraventa de cuentas y objetos
+            de videojuegos. Nos diferenciamos por la atención personalizada, precios justos y
+            entrega en tiempo real vía WhatsApp.
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <div class="row g-3">
+            <div class="col-6"><div class="stat-box"><div class="stat-box-num" style="color:var(--cyan)">500+</div><div class="stat-box-label">Clientes satisfechos</div></div></div>
+            <div class="col-6"><div class="stat-box"><div class="stat-box-num" style="color:var(--pink)">5</div><div class="stat-box-label">Juegos en catálogo</div></div></div>
+            <div class="col-6"><div class="stat-box"><div class="stat-box-num" style="color:var(--green)">‹30m</div><div class="stat-box-label">Tiempo de entrega</div></div></div>
+            <div class="col-6"><div class="stat-box"><div class="stat-box-num" style="color:var(--amber)">7d</div><div class="stat-box-label">Atención semanal</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISIÓN / VALORES -->
+  <section class="py-5 z1">
+    <div class="container py-3">
+      <div class="row gy-5 align-items-center">
+        <div class="col-lg-5">
+          <div class="ps-section-label">Nuestra misión</div>
+          <div class="ps-section-title">Hacemos gaming<br><span>más accesible</span></div>
+          <p style="color:var(--muted);line-height:1.75;margin-bottom:20px">
+            Creemos que todos los jugadores merecen acceso a cuentas y objetos de calidad
+            sin pagar de más. Nuestro modelo de negocio se basa en la confianza, la
+            transparencia y el servicio rápido.
+          </p>
+          <p style="color:var(--muted);line-height:1.75">
+            Todo se gestiona vía WhatsApp para ofrecerte atención humana real,
+            no bots ni formularios. Somos gente real, como tú.
+          </p>
+        </div>
+        <div class="col-lg-7">
+          <div class="row g-3">
+            <div class="col-sm-6"><div class="value-card"><div class="value-icon">🎯</div><div class="value-title">Transparencia</div><div class="value-desc">Sin costos ocultos. El precio que ves es el que pagas.</div></div></div>
+            <div class="col-sm-6"><div class="value-card"><div class="value-icon">⚡</div><div class="value-title">Rapidez</div><div class="value-desc">Priorizamos la entrega inmediata. Tu tiempo vale.</div></div></div>
+            <div class="col-sm-6"><div class="value-card"><div class="value-icon">🛡️</div><div class="value-title">Seguridad</div><div class="value-desc">Verificamos todo antes de entregar. Cero sorpresas.</div></div></div>
+            <div class="col-sm-6"><div class="value-card"><div class="value-icon">💙</div><div class="value-title">Comunidad</div><div class="value-desc">Somos gamers. Entendemos lo que necesitas.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- POR QUÉ ELEGIRNOS - TABLA COMPARATIVA -->
+  <section class="py-5 z1">
+    <div class="container py-3">
+      <div class="text-center mb-5">
+        <div class="ps-section-label">Comparativa</div>
+        <div class="ps-section-title">PixelShop vs <span>la competencia</span></div>
+      </div>
+      <div class="table-responsive">
+        <table class="ps-table" style="background:var(--bg2);border-radius:16px;overflow:hidden">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th style="color:var(--cyan)">✅ PixelShop</th>
+              <th>❌ Otros vendedores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Atención personalizada</td><td style="color:var(--green)">Sí, por WhatsApp</td><td style="color:var(--pink)">Formularios impersonales</td></tr>
+            <tr><td>Tiempo de entrega</td><td style="color:var(--green)">&lt; 30 minutos</td><td style="color:var(--pink)">1-24 horas</td></tr>
+            <tr><td>Verificación de productos</td><td style="color:var(--green)">Siempre antes de entregar</td><td style="color:var(--pink)">No siempre</td></tr>
+            <tr><td>Garantía de entrega</td><td style="color:var(--green)">Sí, reembolso si falla</td><td style="color:var(--pink)">Rara vez</td></tr>
+            <tr><td>Soporte post-venta</td><td style="color:var(--green)">Disponible siempre</td><td style="color:var(--pink)">Nulo o lento</td></tr>
+            <tr><td>Precios</td><td style="color:var(--green)">Competitivos y fijos</td><td style="color:var(--pink)">Variables o caros</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- MÉTODOS DE PAGO -->
+  <section class="py-5 z1" id="pagos">
+    <div class="container py-3">
+      <div class="text-center mb-5">
+        <div class="ps-section-label">Pagos</div>
+        <div class="ps-section-title">Métodos de <span>pago aceptados</span></div>
+        <p style="color:var(--muted);max-width:440px;margin:0 auto">Elige el que te sea más conveniente. Enviamos los datos de pago por WhatsApp.</p>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="pay-card">
+            <div class="pay-icon">🏪</div>
+            <div><div class="pay-name">OXXO Pay</div><div class="pay-desc">Pago en efectivo en cualquier tienda OXXO de México. Sin necesidad de cuenta bancaria. Te enviamos la referencia de pago por WhatsApp.</div></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="pay-card">
+            <div class="pay-icon">🏦</div>
+            <div><div class="pay-name">Transferencia SPEI</div><div class="pay-desc">Compatible con BBVA, Banamex, Banorte, Santander y cualquier banco mexicano. Entrega confirmada en minutos tras el comprobante.</div></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="pay-card">
+            <div class="pay-icon">📱</div>
+            <div><div class="pay-name">CoDi / DiMo</div><div class="pay-desc">Pago inmediato desde tu app bancaria por código QR o número de celular. La opción más rápida para transferencias.</div></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="pay-card">
+            <div class="pay-icon">💳</div>
+            <div><div class="pay-name">PayPal</div><div class="pay-desc">Para pagos con tarjeta de crédito o débito internacional. Se aplica un cargo adicional del 5% por comisión de la plataforma.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 p-3 text-center" style="background:rgba(0,229,255,0.04);border:1px solid var(--border);border-radius:12px;font-size:0.83rem;color:var(--muted)">
+        💡 <strong style="color:var(--text)">Importante:</strong> Nunca entregamos el producto antes de confirmar el pago. Esto protege tanto al comprador como al vendedor.
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- CTA -->
+  <section class="py-5 z1">
+    <div class="container py-3 text-center">
+      <div class="ps-section-title" style="font-size:clamp(1.4rem,3vw,2rem)">¿Tienes dudas? <span>Escríbenos</span></div>
+      <p style="color:var(--muted);margin:12px 0 24px">Estamos disponibles todos los días de 9am a 11pm.</p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a id="ctaWa" href="#" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Abrir WhatsApp</a>
+        <a href="faq.html" class="btn-ps-ghost"><i class="fas fa-question-circle"></i> Ver preguntas frecuentes</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="ps-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="data.js"></script>
+  <script src="ps.js"></script>
+  <script>
+    PS.init('nosotros');
+    document.getElementById('ctaWa').href = PS.waLink('Hola PixelShop! Tengo una duda sobre sus productos 🎮');
+  </script>
+</body>
+</html>

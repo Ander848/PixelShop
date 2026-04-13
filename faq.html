@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Preguntas Frecuentes — PixelShop</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="_shared.css"/>
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg,rgba(0,229,255,0.05),rgba(255,45,111,0.03));
+      border-bottom: 1px solid var(--border);
+      padding: 56px 0;
+    }
+    .faq-category-title {
+      font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+    }
+    .faq-category-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    .step-visual {
+      display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; padding-bottom: 8px;
+    }
+    .step-visual::-webkit-scrollbar { display: none; }
+    .step-v-item {
+      flex: 1; min-width: 140px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 0; padding: 22px 18px; position: relative;
+      text-align: center;
+    }
+    .step-v-item:first-child { border-radius: 14px 0 0 14px; }
+    .step-v-item:last-child  { border-radius: 0 14px 14px 0; }
+    .step-v-item:not(:last-child)::after {
+      content: '→'; position: absolute;
+      right: -12px; top: 50%; transform: translateY(-50%);
+      color: var(--cyan); font-size: 1rem; z-index: 2;
+      background: var(--bg);
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-v-num {
+      font-family: var(--font-head); font-size: 0.7rem; font-weight: 800;
+      color: var(--cyan); letter-spacing: 1px; margin-bottom: 8px;
+    }
+    .step-v-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .step-v-label { font-family: var(--font-ui); font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .step-v-sub { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+
+    .info-box {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 20px;
+    }
+    .info-box-icon { font-size: 1.5rem; margin-bottom: 12px; }
+    .info-box-title { font-family: var(--font-ui); font-weight: 700; font-size: 0.9rem; color: var(--text); margin-bottom: 8px; }
+    .info-box-body { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    /* FAQ search */
+    .faq-search-wrap { position: relative; max-width: 480px; margin: 0 auto 40px; }
+    .faq-search {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 13px 16px 13px 46px;
+      font-family: var(--font-body); font-size: 0.9rem;
+      color: var(--text); width: 100%; outline: none;
+      transition: border-color 0.2s;
+    }
+    .faq-search:focus { border-color: rgba(0,229,255,0.4); }
+    .faq-search::placeholder { color: var(--muted); }
+    .faq-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div id="ps-nav"></div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero z1">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+          <li class="breadcrumb-item active">Preguntas Frecuentes</li>
+        </ol>
+      </nav>
+      <div class="ps-section-label">FAQ</div>
+      <div class="ps-section-title" style="margin-bottom:14px">Preguntas <span>frecuentes</span></div>
+      <p style="color:var(--muted);max-width:500px">Todo lo que necesitas saber sobre PixelShop, el proceso de compra y los métodos de pago.</p>
+    </div>
+  </div>
+
+  <!-- CÓMO FUNCIONA VISUAL -->
+  <section class="py-5 z1" id="como-funciona">
+    <div class="container py-3">
+      <div class="text-center mb-5">
+        <div class="ps-section-label">Proceso</div>
+        <div class="ps-section-title">¿Cómo <span>funciona</span>?</div>
+      </div>
+      <div class="step-visual">
+        <div class="step-v-item"><div class="step-v-num">PASO 1</div><div class="step-v-icon">🔍</div><div class="step-v-label">Elige</div><div class="step-v-sub">Navega el catálogo y selecciona el producto</div></div>
+        <div class="step-v-item"><div class="step-v-num">PASO 2</div><div class="step-v-icon">💬</div><div class="step-v-label">Escríbenos</div><div class="step-v-sub">Clic en "Comprar", se abre WhatsApp con tu pedido</div></div>
+        <div class="step-v-item"><div class="step-v-num">PASO 3</div><div class="step-v-icon">✅</div><div class="step-v-label">Confirmamos</div><div class="step-v-sub">Verificamos disponibilidad y te damos los datos de pago</div></div>
+        <div class="step-v-item"><div class="step-v-num">PASO 4</div><div class="step-v-icon">💳</div><div class="step-v-label">Pagas</div><div class="step-v-sub">OXXO, transferencia, CoDi o PayPal</div></div>
+        <div class="step-v-item"><div class="step-v-num">PASO 5</div><div class="step-v-icon">🚀</div><div class="step-v-label">Recibes</div><div class="step-v-sub">Entregamos en menos de 30 minutos</div></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- MÉTODOS DE PAGO -->
+  <section class="py-5 z1" id="pagos">
+    <div class="container py-3">
+      <div class="text-center mb-5">
+        <div class="ps-section-label">Pagos</div>
+        <div class="ps-section-title">Métodos de <span>pago</span></div>
+      </div>
+      <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-lg-3">
+          <div class="info-box h-100">
+            <div class="info-box-icon">🏪</div>
+            <div class="info-box-title">OXXO Pay</div>
+            <div class="info-box-body">Pago en efectivo en cualquier OXXO. Sin tarjeta ni cuenta bancaria. Te damos la referencia por WhatsApp. <strong style="color:var(--green)">Sin cargo extra.</strong></div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="info-box h-100">
+            <div class="info-box-icon">🏦</div>
+            <div class="info-box-title">Transferencia SPEI</div>
+            <div class="info-box-body">Compatible con todos los bancos mexicanos: BBVA, Banamex, Banorte, Santander, etc. <strong style="color:var(--green)">Sin cargo extra.</strong></div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="info-box h-100">
+            <div class="info-box-icon">📱</div>
+            <div class="info-box-title">CoDi / DiMo</div>
+            <div class="info-box-body">Transfiere desde tu app bancaria por QR o número de teléfono. Es el método más rápido para recibir confirmación. <strong style="color:var(--green)">Sin cargo extra.</strong></div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="info-box h-100">
+            <div class="info-box-icon">💳</div>
+            <div class="info-box-title">PayPal</div>
+            <div class="info-box-body">Para pagos con tarjeta internacional. Aplica un cargo adicional del 5% por la comisión de PayPal. <strong style="color:var(--amber)">+5% comisión.</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="p-3 text-center" style="background:rgba(255,179,0,0.05);border:1px solid rgba(255,179,0,0.2);border-radius:12px;font-size:0.83rem;color:var(--muted)">
+        ⚠️ <strong style="color:var(--amber)">Aviso de seguridad:</strong> Nunca realices pagos antes de que confirmemos tu pedido por WhatsApp. Desconfía de cualquier número diferente al nuestro.
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-hr">
+
+  <!-- FAQ ACCORDION -->
+  <section class="py-5 z1">
+    <div class="container py-3">
+      <div class="text-center mb-4">
+        <div class="ps-section-label">Dudas comunes</div>
+        <div class="ps-section-title">Resolvemos tus <span>preguntas</span></div>
+      </div>
+
+      <div class="faq-search-wrap">
+        <i class="fas fa-search faq-search-icon"></i>
+        <input class="faq-search" id="faqSearch" placeholder="Buscar pregunta..." oninput="filterFAQ()"/>
+      </div>
+
+      <div class="row gy-5" id="faqContainer">
+
+        <!-- CATEGORÍA: GENERAL -->
+        <div class="col-12 faq-section" data-cat="general">
+          <div class="faq-category-title">📋 General</div>
+          <div class="accordion" id="accGeneral">
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#g1">
+                  ¿Qué es PixelShop y qué tipos de productos venden?
+                </button>
+              </h2>
+              <div id="g1" class="accordion-collapse collapse show" data-bs-parent="#accGeneral">
+                <div class="accordion-body">
+                  PixelShop es una tienda mexicana especializada en la venta de <strong style="color:var(--cyan)">cuentas de videojuegos, moneda virtual y objetos digitales</strong> para los juegos más populares: Roblox, Fortnite, Free Fire, Minecraft y Valorant. Todos nuestros productos son verificados antes de la entrega y gestionamos todo por WhatsApp para una atención personalizada.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g2">
+                  ¿Están disponibles todos los días?
+                </button>
+              </h2>
+              <div id="g2" class="accordion-collapse collapse" data-bs-parent="#accGeneral">
+                <div class="accordion-body">
+                  Sí. Nuestro horario de atención es <strong style="color:var(--cyan)">lunes a domingo de 9:00 AM a 11:00 PM</strong> (hora del Centro de México). Fuera de este horario puedes escribirnos y responderemos en cuanto estemos disponibles.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g3">
+                  ¿Por qué las ventas son por WhatsApp y no por la página?
+                </button>
+              </h2>
+              <div id="g3" class="accordion-collapse collapse" data-bs-parent="#accGeneral">
+                <div class="accordion-body">
+                  Porque queremos ofrecerte <strong style="color:var(--cyan)">atención humana real</strong>. Al cerrar la venta por WhatsApp podemos verificar tu pedido, confirmar disponibilidad en tiempo real y orientarte mejor. Además, no almacenamos datos personales en ninguna base de datos, lo que hace todo más seguro para ti.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CATEGORÍA: COMPRA -->
+        <div class="col-12 faq-section" data-cat="compra">
+          <div class="faq-category-title">🛒 Proceso de compra</div>
+          <div class="accordion" id="accCompra">
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
+                  ¿Cómo hago un pedido paso a paso?
+                </button>
+              </h2>
+              <div id="c1" class="accordion-collapse collapse" data-bs-parent="#accCompra">
+                <div class="accordion-body">
+                  <strong style="color:var(--cyan)">1.</strong> Elige el producto en el catálogo.<br>
+                  <strong style="color:var(--cyan)">2.</strong> Haz clic en "Comprar" — se abrirá WhatsApp con tu pedido ya escrito.<br>
+                  <strong style="color:var(--cyan)">3.</strong> Confirma el pedido y acuerda el método de pago.<br>
+                  <strong style="color:var(--cyan)">4.</strong> Realiza el pago y envíanos el comprobante.<br>
+                  <strong style="color:var(--cyan)">5.</strong> Recibe tu producto en menos de 30 minutos. ¡Listo!
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+                  ¿Cuánto tiempo tarda la entrega?
+                </button>
+              </h2>
+              <div id="c2" class="accordion-collapse collapse" data-bs-parent="#accCompra">
+                <div class="accordion-body">
+                  La mayoría de productos como Robux, Diamonds y V-Bucks se entregan en <strong style="color:var(--cyan)">menos de 15 minutos</strong> tras confirmar el pago. Las cuentas de juego suelen entregarse en <strong style="color:var(--cyan)">5 a 20 minutos</strong>. En caso de demora te avisamos de inmediato.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c3">
+                  ¿Puedo pedir un producto que no está en el catálogo?
+                </button>
+              </h2>
+              <div id="c3" class="accordion-collapse collapse" data-bs-parent="#accCompra">
+                <div class="accordion-body">
+                  ¡Claro! Escríbenos por WhatsApp y con gusto buscamos lo que necesitas. Constantemente actualizamos el catálogo con nuevos productos según la demanda de nuestros clientes.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CATEGORÍA: SEGURIDAD -->
+        <div class="col-12 faq-section" data-cat="seguridad">
+          <div class="faq-category-title">🔒 Seguridad y garantías</div>
+          <div class="accordion" id="accSeg">
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#s1">
+                  ¿Es seguro comprar aquí? ¿Me pueden banear del juego?
+                </button>
+              </h2>
+              <div id="s1" class="accordion-collapse collapse" data-bs-parent="#accSeg">
+                <div class="accordion-body">
+                  Usamos métodos seguros para la entrega. Para Robux usamos el método GamePass, que es el más seguro disponible. Para cuentas, recomendamos <strong style="color:var(--cyan)">cambiar contraseña y correo inmediatamente</strong> tras recibirla.<br><br>
+                  <span style="color:var(--amber)">⚠️ Aviso:</span> La compra de ciertos items puede ir contra los Términos de Servicio de algunos juegos. El riesgo de ban es bajo con nuestros métodos, pero no podemos garantizar al 100% que no ocurra. Comprende esto antes de comprar.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#s2">
+                  ¿Qué pasa si el producto no llega o hay un problema?
+                </button>
+              </h2>
+              <div id="s2" class="accordion-collapse collapse" data-bs-parent="#accSeg">
+                <div class="accordion-body">
+                  Ofrecemos <strong style="color:var(--cyan)">garantía de entrega</strong>: si el producto no llega correctamente, lo resolvemos o devolvemos tu dinero. Contáctanos inmediatamente por WhatsApp en caso de cualquier problema. Una vez entregado y verificado el producto, no se aceptan devoluciones por cambio de opinión.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#s3">
+                  ¿Guardan mis datos personales?
+                </button>
+              </h2>
+              <div id="s3" class="accordion-collapse collapse" data-bs-parent="#accSeg">
+                <div class="accordion-body">
+                  <strong style="color:var(--cyan)">No.</strong> PixelShop no tiene base de datos ni almacena información personal. Toda la comunicación ocurre en WhatsApp, que tiene su propio cifrado. No pedimos más información de la necesaria para entregar tu pedido.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CATEGORÍA: PAGOS -->
+        <div class="col-12 faq-section" data-cat="pagos">
+          <div class="faq-category-title">💳 Pagos</div>
+          <div class="accordion" id="accPagos">
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p1">
+                  ¿Cuáles son los métodos de pago?
+                </button>
+              </h2>
+              <div id="p1" class="accordion-collapse collapse" data-bs-parent="#accPagos">
+                <div class="accordion-body">
+                  Aceptamos: <strong style="color:var(--cyan)">OXXO Pay</strong> (efectivo), <strong style="color:var(--cyan)">Transferencia SPEI</strong> (todos los bancos), <strong style="color:var(--cyan)">CoDi / DiMo</strong> y <strong style="color:var(--cyan)">PayPal</strong> (+5% por comisión). En todos los casos te enviamos los datos por WhatsApp tras confirmar tu pedido.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p2">
+                  ¿Tengo que pagar antes de recibir el producto?
+                </button>
+              </h2>
+              <div id="p2" class="accordion-collapse collapse" data-bs-parent="#accPagos">
+                <div class="accordion-body">
+                  Sí, el pago se realiza antes de la entrega. Esto protege a ambas partes. <strong style="color:var(--cyan)">Siempre pedimos comprobante de pago</strong> antes de entregar cualquier producto. Si desconfías, puedes pedir referencias o verificar reseñas de clientes anteriores.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-4 z1">
+    <div class="container py-2 text-center">
+      <div style="background:rgba(0,229,255,0.04);border:1px solid var(--border);border-radius:20px;padding:40px 24px">
+        <div class="ps-section-title" style="font-size:1.6rem">¿No encontraste tu respuesta?</div>
+        <p style="color:var(--muted);margin:10px 0 22px">Escríbenos directamente y te respondemos en minutos.</p>
+        <a id="faqWa" href="#" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Preguntar por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="ps-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="data.js"></script>
+  <script src="ps.js"></script>
+  <script>
+    PS.init('faq');
+    document.getElementById('faqWa').href = PS.waLink('Hola PixelShop! Tengo una pregunta que no encontré en el FAQ 🙋');
+
+    function filterFAQ() {
+      const q = document.getElementById('faqSearch').value.toLowerCase();
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = (!q || text.includes(q)) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

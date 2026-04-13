@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto — PixelShop</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="_shared.css"/>
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg,rgba(0,229,255,0.05),rgba(255,45,111,0.03));
+      border-bottom: 1px solid var(--border);
+      padding: 56px 0;
+    }
+
+    /* Big WA card */
+    .wa-main-card {
+      background: linear-gradient(135deg, rgba(37,211,102,0.1), rgba(37,211,102,0.03));
+      border: 1.5px solid rgba(37,211,102,0.3);
+      border-radius: 20px;
+      padding: 44px 36px;
+      text-align: center;
+    }
+    .wa-main-icon { font-size: 3.6rem; margin-bottom: 16px; }
+    .wa-main-title { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+    .wa-main-sub { font-size: 0.9rem; color: var(--muted); max-width: 400px; margin: 0 auto 24px; line-height: 1.6; }
+
+    /* Quick topics */
+    .topic-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 18px;
+      font-family: var(--font-ui); font-weight: 600; font-size: 0.88rem;
+      color: var(--text); cursor: pointer; width: 100%;
+      text-align: left; transition: all 0.2s; text-decoration: none;
+    }
+    .topic-btn:hover { border-color: rgba(37,211,102,0.4); background: rgba(37,211,102,0.05); color: var(--text); }
+    .topic-emoji { font-size: 1.3rem; }
+    .topic-label { font-size: 0.88rem; font-weight: 700; margin-bottom: 2px; }
+    .topic-sub { font-size: 0.73rem; color: var(--muted); font-weight: 400; font-family: var(--font-body); }
+
+    /* Info cards */
+    .info-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 20px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .info-card-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .info-card-title { font-family: var(--font-ui); font-weight: 700; font-size: 0.88rem; color: var(--text); margin-bottom: 4px; }
+    .info-card-body { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    /* Schedule table */
+    .schedule-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid var(--border2);
+    }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-day { font-family: var(--font-ui); font-weight: 600; font-size: 0.85rem; color: var(--text); }
+    .schedule-hours { font-family: var(--font-ui); font-weight: 700; font-size: 0.85rem; }
+    .schedule-open { color: var(--green); }
+    .schedule-badge {
+      font-size: 0.65rem; background: rgba(0,255,170,0.1); color: var(--green);
+      border: 1px solid rgba(0,255,170,0.3); border-radius: 6px;
+      padding: 2px 8px; font-family: var(--font-ui); font-weight: 700;
+    }
+
+    /* Message composer */
+    .composer {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 18px; overflow: hidden;
+    }
+    .composer-header {
+      background: #075E54; padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .composer-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #25d366; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .composer-name { font-family: var(--font-ui); font-weight: 700; font-size: 0.9rem; color: #fff; }
+    .composer-status { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+    .composer-body { padding: 20px; }
+    .composer-label { font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .composer-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .composer-chip {
+      background: var(--bg3); border: 1px solid var(--border2);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 0.78rem; cursor: pointer;
+      font-family: var(--font-ui); font-weight: 600;
+      transition: all 0.2s; color: var(--muted);
+    }
+    .composer-chip:hover, .composer-chip.selected {
+      background: rgba(37,211,102,0.1);
+      border-color: rgba(37,211,102,0.4); color: var(--green);
+    }
+    .composer-input {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px;
+      font-family: var(--font-body); font-size: 0.85rem;
+      color: var(--text); width: 100%; outline: none;
+      resize: none; transition: border-color 0.2s;
+      min-height: 80px;
+    }
+    .composer-input:focus { border-color: rgba(37,211,102,0.4); }
+    .composer-input::placeholder { color: var(--muted); }
+    .composer-preview {
+      background: rgba(37,211,102,0.07); border: 1px solid rgba(37,211,102,0.2);
+      border-radius: 10px; padding: 12px 14px;
+      font-size: 0.82rem; color: var(--text); line-height: 1.5;
+      margin-top: 12px; display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="ps-nav"></div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero z1">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+          <li class="breadcrumb-item active">Contacto</li>
+        </ol>
+      </nav>
+      <div class="ps-section-label">Atención al cliente</div>
+      <div class="ps-section-title" style="margin-bottom:14px">Estamos aquí para <span>ayudarte</span></div>
+      <p style="color:var(--muted);max-width:480px">Todas las ventas y dudas se atienden directamente por WhatsApp. Sin formularios, sin esperas.</p>
+    </div>
+  </div>
+
+  <section class="py-5 z1">
+    <div class="container">
+      <div class="row g-5">
+
+        <!-- LEFT COLUMN -->
+        <div class="col-lg-7">
+
+          <!-- Main WA card -->
+          <div class="wa-main-card mb-4">
+            <div class="wa-main-icon">📱</div>
+            <div class="wa-main-title">Escríbenos por WhatsApp</div>
+            <div class="wa-main-sub">Atención personalizada de lunes a domingo. Respondemos en minutos durante nuestro horario de servicio.</div>
+            <a id="mainWaBtn" href="#" target="_blank" class="btn-wa" style="font-size:1rem;padding:13px 32px">
+              <i class="fab fa-whatsapp fa-lg"></i> Abrir WhatsApp
+            </a>
+            <div class="mt-3" style="font-size:0.8rem;color:var(--muted)">
+              📞 <strong style="color:var(--text)">+52 1 (XXX) XXX-XXXX</strong>
+            </div>
+          </div>
+
+          <!-- Quick topics -->
+          <div style="font-family:var(--font-ui);font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">¿Sobre qué quieres escribir?</div>
+          <div class="row g-2" id="topicsGrid"></div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="col-lg-5">
+
+          <!-- Message composer -->
+          <div class="composer mb-4">
+            <div class="composer-header">
+              <div class="composer-avatar">🎮</div>
+              <div>
+                <div class="composer-name">PixelShop</div>
+                <div class="composer-status">● En línea</div>
+              </div>
+            </div>
+            <div class="composer-body">
+              <div class="composer-label">Arma tu mensaje</div>
+              <div class="composer-chips" id="gameChips">
+                <span class="composer-chip" onclick="selectChip(this,'Roblox')">🟥 Roblox</span>
+                <span class="composer-chip" onclick="selectChip(this,'Fortnite')">⚡ Fortnite</span>
+                <span class="composer-chip" onclick="selectChip(this,'Free Fire')">🔥 Free Fire</span>
+                <span class="composer-chip" onclick="selectChip(this,'Minecraft')">⛏️ Minecraft</span>
+                <span class="composer-chip" onclick="selectChip(this,'Valorant')">🎯 Valorant</span>
+              </div>
+              <textarea class="composer-input" id="customMsg" placeholder="Escribe tu pregunta o agrega detalles de tu pedido..." oninput="updatePreview()"></textarea>
+              <div class="composer-preview" id="msgPreview"></div>
+              <a id="composerWaBtn" href="#" target="_blank" class="btn-wa w-100 mt-3 justify-content-center">
+                <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- Info cards -->
+          <div class="d-flex flex-column gap-2">
+            <div class="info-card">
+              <div class="info-card-icon">🕐</div>
+              <div><div class="info-card-title">Horario de atención</div><div class="info-card-body">Lun – Dom: 9:00 AM – 11:00 PM<br>Hora del Centro de México (CST)</div></div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">⚡</div>
+              <div><div class="info-card-title">Tiempo de respuesta</div><div class="info-card-body">Respondemos en promedio en menos de 10 minutos durante el horario de atención.</div></div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">🔒</div>
+              <div><div class="info-card-title">Privacidad</div><div class="info-card-body">No almacenamos datos. Solo usamos la info necesaria para entregar tu pedido.</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Schedule -->
+      <div class="mt-5">
+        <div class="ps-section-label mb-3">Horario</div>
+        <div class="row">
+          <div class="col-md-6">
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px 22px">
+              <div id="scheduleTable"></div>
+            </div>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <div class="p-4">
+              <div style="font-family:var(--font-head);font-size:1.1rem;font-weight:800;margin-bottom:10px">Atención 7 días a la semana</div>
+              <p style="font-size:0.85rem;color:var(--muted);line-height:1.7">
+                Sabemos que los gamers no descansan los fines de semana. Por eso nosotros tampoco.
+                Escríbenos cualquier día y te atendemos con la misma calidad.
+              </p>
+              <div class="mt-3">
+                <span class="badge-avail">Servicio activo hoy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="ps-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="data.js"></script>
+  <script src="ps.js"></script>
+  <script>
+    PS.init('contacto');
+
+    const defaultMsg = 'Hola PixelShop! Quiero información sobre sus productos 🎮';
+    document.getElementById('mainWaBtn').href = PS.waLink(defaultMsg);
+    document.getElementById('composerWaBtn').href = PS.waLink(defaultMsg);
+
+    // Topics
+    const topics = [
+      { emoji:'🛒', label:'Hacer un pedido',      sub:'Quiero comprar un producto',          msg:'Hola PixelShop! Quiero hacer un pedido. ¿Pueden ayudarme? 🛒' },
+      { emoji:'📦', label:'Estado de mi pedido',  sub:'Preguntar por un pedido en proceso',  msg:'Hola! Tengo un pedido en proceso y quiero saber el estado.' },
+      { emoji:'💳', label:'Métodos de pago',       sub:'Dudas sobre cómo pagar',              msg:'Hola PixelShop! Quisiera saber qué métodos de pago aceptan 💳' },
+      { emoji:'🔄', label:'Garantía / Problema',   sub:'Tengo un problema con mi compra',     msg:'Hola! Tuve un problema con una compra y quisiera ayuda 🔄' },
+      { emoji:'📋', label:'Consultar catálogo',    sub:'Ver disponibilidad de productos',     msg:'Hola PixelShop! Quisiera consultar la disponibilidad de un producto.' },
+      { emoji:'💬', label:'Otra consulta',         sub:'Tengo una pregunta general',          msg:'Hola PixelShop! Tengo una consulta general 💬' },
+    ];
+    const topicsEl = document.getElementById('topicsGrid');
+    topics.forEach(t => {
+      topicsEl.innerHTML += `
+        <div class="col-sm-6">
+          <a href="${PS.waLink(t.msg)}" target="_blank" class="topic-btn">
+            <span class="topic-emoji">${t.emoji}</span>
+            <div><div class="topic-label">${t.label}</div><div class="topic-sub">${t.sub}</div></div>
+            <i class="fas fa-chevron-right ms-auto" style="color:var(--muted);font-size:0.75rem"></i>
+          </a>
+        </div>`;
+    });
+
+    // Schedule
+    const days = [
+      { day:'Lunes',      hours:'9:00 AM – 11:00 PM' },
+      { day:'Martes',     hours:'9:00 AM – 11:00 PM' },
+      { day:'Miércoles',  hours:'9:00 AM – 11:00 PM' },
+      { day:'Jueves',     hours:'9:00 AM – 11:00 PM' },
+      { day:'Viernes',    hours:'9:00 AM – 11:00 PM' },
+      { day:'Sábado',     hours:'10:00 AM – 11:00 PM' },
+      { day:'Domingo',    hours:'10:00 AM – 10:00 PM' },
+    ];
+    const today = new Date().getDay(); // 0=Sun
+    const dayMap = [6,0,1,2,3,4,5];
+    const schedEl = document.getElementById('scheduleTable');
+    days.forEach((d,i) => {
+      const isToday = dayMap[today] === i;
+      schedEl.innerHTML += `
+        <div class="schedule-row">
+          <span class="schedule-day">${d.day}${isToday?' <span class="schedule-badge">Hoy</span>':''}</span>
+          <span class="schedule-hours schedule-open">${d.hours}</span>
+        </div>`;
+    });
+
+    // Message composer
+    let selectedGame = '';
+    function selectChip(el, game) {
+      document.querySelectorAll('.composer-chip').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedGame = game;
+      updatePreview();
+    }
+    function updatePreview() {
+      const custom = document.getElementById('customMsg').value.trim();
+      const base = selectedGame
+        ? `Hola PixelShop! Me interesa un producto de ${selectedGame}.`
+        : 'Hola PixelShop!';
+      const full = custom ? `${base} ${custom}` : base;
+      const prev = document.getElementById('msgPreview');
+      prev.style.display = 'block';
+      prev.textContent = `Vista previa: "${full}"`;
+      document.getElementById('composerWaBtn').href = PS.waLink(full);
+    }
+  </script>
+</body>
+</html>
