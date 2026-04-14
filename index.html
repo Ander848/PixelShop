@@ -60,7 +60,7 @@
     /* ============ GAME SLIDER CARDS ============ */
     .game-slider-wrap {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       overflow-x: auto;
       padding-bottom: 8px;
       scrollbar-width: thin;
@@ -72,8 +72,8 @@
     .gcard {
       flex-shrink: 0;
       /* Each card takes ~1/5 of container width, min 200px */
-      width: calc(20% - 6px);
-      min-width: 260px;
+      width: calc(20% - 8px);
+      min-width: 280px;
       height: 420px;
       border-radius: 20px;
       overflow: hidden;
@@ -138,7 +138,7 @@
 
     @media (max-width: 767px) {
       .hero { min-height: auto; padding: 32px 0 28px; }
-      .gcard { min-width: 220px; height: 340px; width: 220px; }
+      .gcard { min-width: 240px; height: 340px; width: 240px; }
       .hero h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
     }
 
@@ -345,12 +345,24 @@
   CS.init('home');
 
   // Imágenes de fondo reales para cada juego (Wikimedia / dominio público)
+/* ============================================================
+     IMÁGENES DE FONDO — CONFIGURACIÓN MANUAL
+     ============================================================
+     Pon aquí la ruta o URL de tu imagen para cada juego.
+     Ejemplos:
+       './img/roblox.jpg'       ← imagen local en carpeta img/
+       './img/fortnite.png'
+       'https://tu-sitio.com/imagen.jpg'  ← URL externa
+
+     Si dejas el valor como cadena vacía '' se mostrará
+     solo el color de fondo del juego sin imagen.
+  ============================================================ */
   const GAME_IMGS = {
-    roblox:    'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Roblox%27s_icon.png/240px-Roblox%27s_icon.png',
-    fortnite:  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Fortnite_wordmark.svg/320px-Fortnite_wordmark.svg.png',
-    freefire:  'https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Free_Fire_logo.png/250px-Free_Fire_logo.png',
-    minecraft: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Minecraft_cover.png/250px-Minecraft_cover.png',
-    valorant:  'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Valorant_logo_-_pink_color_version.svg/320px-Valorant_logo_-_pink_color_version.svg.png',
+    roblox:    '',   // ← pon tu imagen de Roblox aquí
+    fortnite:  '',   // ← pon tu imagen de Fortnite aquí
+    freefire:  '',   // ← pon tu imagen de Free Fire aquí
+    minecraft: '',   // ← pon tu imagen de Minecraft aquí
+    valorant:  '',   // ← pon tu imagen de Valorant aquí
   };
 
   // Hero game cards — tarjetas grandes con imagen de fondo
@@ -422,10 +434,10 @@
 
   // Testimonials
   [
-    {text:'Compré 800 Robux y los recibí en menos de 10 minutos. El trato súper amable y el precio mejor que en cualquier otro lado.',  author:'Miguel A.',  game:'Roblox',   stars:2},
-    {text:'Ya van 3 veces que compro cuentas de Fortnite con ellos. Siempre cumplen y solucionan cualquier problema rapidísimo.',       author:'Karla M.',   game:'Fortnite',  stars:2},
-    {text:'Dudé al principio pero me mandaron screenshots antes de pagar. Cuenta de Valorant Platino perfecta. Super recomendado.',     author:'Jesús R.',   game:'Valorant',  stars:4},
-    {text:'Los Diamonds de Free Fire llegaron al instante. Solo mandas el ID y listo. Proceso muy sencillo y precio justo.',            author:'Andrea L.',  game:'Free Fire', stars:4},
+    {text:'Compré 800 Robux y los recibí en menos de 10 minutos. El trato súper amable y el precio mejor que en cualquier otro lado.',  author:'Miguel A.',  game:'Roblox',   stars:5},
+    {text:'Ya van 3 veces que compro cuentas de Fortnite con ellos. Siempre cumplen y solucionan cualquier problema rapidísimo.',       author:'Karla M.',   game:'Fortnite',  stars:5},
+    {text:'Dudé al principio pero me mandaron screenshots antes de pagar. Cuenta de Valorant Platino perfecta. Super recomendado.',     author:'Jesús R.',   game:'Valorant',  stars:5},
+    {text:'Los Diamonds de Free Fire llegaron al instante. Solo mandas el ID y listo. Proceso muy sencillo y precio justo.',            author:'Andrea L.',  game:'Free Fire', stars:5},
   ].forEach((t,i) => {
     document.getElementById('testGrid').innerHTML += `
       <div class="col-md-6 col-lg-3">

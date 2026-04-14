@@ -8,20 +8,54 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <style>
-    /* Desktop sidebar buttons */
+
+    /* ---- Sidebar buttons con imagen de fondo ---- */
     .sidebar-btn {
-      display:flex; align-items:center; gap:12px;
-      background:var(--bg2); border:1px solid var(--border2);
-      border-radius:12px; padding:12px 16px;
-      font-family:var(--font-ui); font-weight:600; font-size:0.9rem;
-      color:var(--muted); cursor:pointer; width:100%;
-      text-align:left; transition:all 0.2s; margin-bottom:6px;
+      position: relative;
+      height: 70px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      border: 1.5px solid rgba(255,255,255,0.07);
+      margin-bottom: 8px;
+      transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
+      display: block;
+      text-decoration: none;
     }
-    .sidebar-btn:hover  { border-color:var(--border); color:var(--text); }
-    .sidebar-btn.active { background:rgba(0,229,255,0.08); border-color:rgba(0,229,255,0.35); color:var(--cyan); }
-    .sidebar-btn.active .s-count { color:rgba(0,229,255,0.6); }
-    .s-emoji { font-size:1.3rem; flex-shrink:0; }
-    .s-count { font-size:0.7rem; color:var(--muted); margin-top:1px; }
+    .sidebar-btn:hover {
+      transform: translateX(4px);
+      border-color: rgba(0,229,255,0.4);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .sidebar-btn.active {
+      border-color: rgba(0,229,255,0.55);
+      box-shadow: 0 4px 16px rgba(0,229,255,0.15);
+    }
+    .sb-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform 0.35s;
+    }
+    .sidebar-btn:hover .sb-bg { transform: scale(1.06); }
+    .sb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.2) 100%);
+    }
+    .sidebar-btn.active .sb-overlay {
+      background: linear-gradient(to right, rgba(0,30,40,0.9) 0%, rgba(0,229,255,0.08) 100%);
+    }
+    .sb-body {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 14px;
+    }
+    .sb-emoji { font-size: 1.4rem; flex-shrink: 0; }
+    .sb-name  { font-family: var(--font-ui); font-weight: 700; font-size: 0.9rem; color: #fff; margin-bottom: 2px; }
+    .sb-count { font-size: 0.68rem; color: rgba(255,255,255,0.5); }
+    .sidebar-btn.active .sb-name  { color: var(--cyan); }
+    .sidebar-btn.active .sb-count { color: rgba(0,229,255,0.6); }
 
     /* Mobile dropdown */
     .mobile-select {
@@ -215,12 +249,24 @@
 <script src="data.js"></script>
 <script src="cs.js"></script>
 <script>
+/* ============================================================
+     IMÁGENES DE FONDO — CONFIGURACIÓN MANUAL
+     ============================================================
+     Pon aquí la ruta o URL de tu imagen para cada juego.
+     Ejemplos:
+       './img/roblox.jpg'       ← imagen local en carpeta img/
+       './img/fortnite.png'
+       'https://tu-sitio.com/imagen.jpg'  ← URL externa
+
+     Si dejas el valor como cadena vacía '' se mostrará
+     solo el color de fondo del juego sin imagen.
+  ============================================================ */
   const GAME_IMGS = {
-    roblox:    'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Roblox%27s_icon.png/240px-Roblox%27s_icon.png',
-    fortnite:  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Fortnite_wordmark.svg/320px-Fortnite_wordmark.svg.png',
-    freefire:  'https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Free_Fire_logo.png/250px-Free_Fire_logo.png',
-    minecraft: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Minecraft_cover.png/250px-Minecraft_cover.png',
-    valorant:  'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Valorant_logo_-_pink_color_version.svg/320px-Valorant_logo_-_pink_color_version.svg.png',
+    roblox:    '',   // ← pon tu imagen de Roblox aquí
+    fortnite:  '',   // ← pon tu imagen de Fortnite aquí
+    freefire:  '',   // ← pon tu imagen de Free Fire aquí
+    minecraft: '',   // ← pon tu imagen de Minecraft aquí
+    valorant:  '',   // ← pon tu imagen de Valorant aquí
   };
 
   CS.init('catalogo');
@@ -247,17 +293,32 @@
   function buildDesktop() {
     const el = document.getElementById('desktopSidebar');
     const tot = GAMES.reduce((a,g)=>a+g.categories.reduce((b,c)=>b+c.products.length,0),0);
+
+    // Botón "Todos los juegos"
     el.innerHTML =
       '<button class="sidebar-btn' + (!activeGame?' active':'') + '" onclick="selectGame(null)">' +
-      '<span class="s-emoji">🎮</span>' +
-      '<div><div>Todos los juegos</div><div class="s-count">' + tot + ' productos</div></div>' +
+        '<div class="sb-bg" style="background:#0e0e1c;"></div>' +
+        '<div class="sb-overlay"></div>' +
+        '<div class="sb-body">' +
+          '<span class="sb-emoji">🎮</span>' +
+          '<div><div class="sb-name">Todos los juegos</div><div class="sb-count">' + tot + ' productos</div></div>' +
+        '</div>' +
       '</button>';
+
     GAMES.forEach(g => {
-      const n = g.categories.reduce((a,c)=>a+c.products.length,0);
+      const n    = g.categories.reduce((a,c)=>a+c.products.length,0);
+      const img  = GAME_IMGS[g.id] || '';
+      const bgStyle = img
+        ? 'background:linear-gradient(135deg,' + g.color + ',' + g.color2 + ');background-image:url(' + img + ');background-size:cover;background-position:center;'
+        : 'background:linear-gradient(135deg,' + g.color + ',' + g.color2 + ');';
       el.innerHTML +=
         '<button class="sidebar-btn' + (activeGame===g.id?' active':'') + '" onclick="selectGame(\'' + g.id + '\')">' +
-        '<span class="s-emoji">' + g.emoji + '</span>' +
-        '<div><div>' + g.name + '</div><div class="s-count">' + n + ' productos</div></div>' +
+          '<div class="sb-bg" style="' + bgStyle + '"></div>' +
+          '<div class="sb-overlay"></div>' +
+          '<div class="sb-body">' +
+            '<span class="sb-emoji">' + g.emoji + '</span>' +
+            '<div><div class="sb-name">' + g.name + '</div><div class="sb-count">' + n + ' productos</div></div>' +
+          '</div>' +
         '</button>';
     });
   }
