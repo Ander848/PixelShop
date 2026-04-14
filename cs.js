@@ -1,6 +1,6 @@
 // CORIALSTORE — Shared UI (navbar + footer + WhatsApp links)
 // ← CAMBIA TU NÚMERO AQUÍ  (521 + 10 dígitos, ej: 5214771234567)
-const CS_WA = '573053825822';
+const CS_WA = '573226502683';
 
 const CS = {
   wa(msg) {
@@ -41,7 +41,7 @@ const CS = {
   },
 
   footer() {
-    const methods = ['🏪 OXXO Pay','🏦 SPEI','📱 CoDi / DiMo','💳 PayPal'];
+    const methods = ['₿ Crypto','🏪 Depósito OXXO','🏦 Transferencia'];
     return `
       <footer class="cs-footer">
         <div class="container">
@@ -80,7 +80,7 @@ const CS = {
               </div>
               <div class="mt-4" style="font-size:0.8rem;color:var(--muted)">
                 Horario:<br>
-                <span style="color:var(--text)">Lunes – Domingo · 9:00 AM – 11:00 PM</span>
+                <span style="color:var(--text)">Lunes – Domingo · 8:00 AM – 2:00 AM</span>
               </div>
             </div>
           </div>

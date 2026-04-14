@@ -63,6 +63,74 @@
 
     .result-count { font-family:var(--font-ui); font-size:0.8rem; color:var(--muted); }
     .result-count strong { color:var(--cyan); }
+
+    /* ---- Tarjeta de producto con imagen de fondo ---- */
+    .pcard {
+      position: relative;
+      height: 270px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid rgba(255,255,255,0.06);
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      display: flex; flex-direction: column;
+    }
+    .pcard:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0,229,255,0.4);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+    }
+    .pcard-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform 0.35s;
+    }
+    .pcard:hover .pcard-bg { transform: scale(1.05); }
+    .pcard-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.05) 0%,
+        rgba(0,0,0,0.5)  40%,
+        rgba(0,0,0,0.92) 100%);
+    }
+    .pcard-body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 14px 14px 16px;
+    }
+    .pcard-game-tag {
+      font-size: 0.62rem; background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px; padding: 2px 7px;
+      color: rgba(255,255,255,0.7);
+      font-family: var(--font-ui); font-weight: 600;
+      display: inline-block; margin-bottom: 5px;
+    }
+    .pcard-avail  { display:inline-block; font-size:0.58rem; font-weight:700; background:rgba(0,255,170,0.18); color:var(--green); border:1px solid rgba(0,255,170,0.35); border-radius:5px; padding:1px 7px; margin-bottom:5px; }
+    .pcard-sold   { display:inline-block; font-size:0.58rem; font-weight:700; background:rgba(255,45,111,0.18); color:var(--pink);  border:1px solid rgba(255,45,111,0.35); border-radius:5px; padding:1px 7px; margin-bottom:5px; }
+    .pcard-name   { font-family:var(--font-head); font-size:0.9rem; font-weight:800; color:#fff; margin-bottom:2px; text-shadow:0 1px 6px rgba(0,0,0,0.6); line-height:1.2; }
+    .pcard-price  { font-family:var(--font-head); font-size:1rem; font-weight:800; color:var(--green); margin:4px 0 8px; text-shadow:0 0 10px rgba(0,255,170,0.4); }
+    .pcard-price small { font-family:var(--font-body); font-size:0.65rem; color:rgba(255,255,255,0.5); font-weight:400; }
+    .pcard-desc  { font-size:0.72rem; color:rgba(255,255,255,0.55); line-height:1.45; margin-bottom:6px; }
+
+    /* ---- Banner de juego seleccionado con imagen ---- */
+    .game-banner {
+      position: relative; height: 110px; border-radius: 16px;
+      overflow: hidden; border: 1.5px solid rgba(255,255,255,0.07);
+    }
+    .game-banner-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+    }
+    .game-banner-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.15) 100%);
+    }
+    .game-banner-body {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; gap: 16px; padding: 0 24px;
+    }
+    .game-banner-emoji { font-size: 2.6rem; flex-shrink: 0; }
+    .game-banner-name { font-family: var(--font-head); font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 3px; }
+    .game-banner-sub  { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
   </style>
 </head>
 <body>
@@ -147,6 +215,14 @@
 <script src="data.js"></script>
 <script src="cs.js"></script>
 <script>
+  const GAME_IMGS = {
+    roblox:    'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Roblox%27s_icon.png/240px-Roblox%27s_icon.png',
+    fortnite:  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Fortnite_wordmark.svg/320px-Fortnite_wordmark.svg.png',
+    freefire:  'https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Free_Fire_logo.png/250px-Free_Fire_logo.png',
+    minecraft: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Minecraft_cover.png/250px-Minecraft_cover.png',
+    valorant:  'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Valorant_logo_-_pink_color_version.svg/320px-Valorant_logo_-_pink_color_version.svg.png',
+  };
+
   CS.init('catalogo');
 
   let activeGame = null;
@@ -203,12 +279,21 @@
     const el = document.getElementById('gameHeader');
     if (!activeGame) { el.innerHTML=''; return; }
     const g = GAMES.find(x=>x.id===activeGame);
+    const imgUrl = GAME_IMGS[g.id] || '';
     el.innerHTML = `
-      <div style="background:linear-gradient(135deg,${g.color}22,${g.color2}44);border:1px solid ${g.color}44;border-radius:16px;padding:18px 22px;display:flex;align-items:center;gap:14px">
-        <span style="font-size:2.4rem">${g.emoji}</span>
-        <div>
-          <div style="font-family:var(--font-head);font-size:1.15rem;font-weight:800;color:var(--text)">${g.name}</div>
-          <div style="font-size:0.8rem;color:var(--muted)">${g.tagline}</div>
+      <div class="game-banner">
+        <div class="game-banner-bg" style="background:linear-gradient(135deg,${g.color},${g.color2});">
+          ${imgUrl ? `<img src="${imgUrl}" alt="${g.name}"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5;mix-blend-mode:luminosity;"
+            onerror="this.style.display='none'"/>` : ''}
+        </div>
+        <div class="game-banner-overlay"></div>
+        <div class="game-banner-body">
+          <span class="game-banner-emoji">${g.emoji}</span>
+          <div>
+            <div class="game-banner-name">${g.name}</div>
+            <div class="game-banner-sub">${g.tagline}</div>
+          </div>
         </div>
       </div>`;
   }
@@ -261,21 +346,31 @@
     const showGame = !activeGame;
     grid.innerHTML = prods.map(p => {
       const msg = `Hola CorialStore! Quiero comprar: ${p.name} (${p.gameName}) - ${p.price} MXN. Por favor confirma disponibilidad y método de pago.`;
+      const g = GAMES.find(x => x.id === p.gameId);
+      const imgUrl = GAME_IMGS[p.gameId] || '';
+      const bgColor = g ? `linear-gradient(135deg,${g.color},${g.color2})` : '#0e0e1c';
       return `
         <div class="col-6 col-md-4">
-          <div class="product-card">
-            <div class="d-flex justify-content-between align-items-start mb-1">
-              <div class="product-icon">${p.icon}</div>
-              ${showGame?`<span style="font-size:0.68rem;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:2px 8px;color:var(--muted);font-family:var(--font-ui)">${p.gameEmoji} ${p.gameName}</span>`:''}
+          <div class="pcard">
+            <div class="pcard-bg" style="background:${bgColor};">
+              ${imgUrl ? `<img src="${imgUrl}" alt="${p.gameName}"
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35;mix-blend-mode:luminosity;"
+                onerror="this.style.display='none'"/>` : ''}
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.18">${p.icon}</div>
             </div>
-            <span class="${p.avail?'badge-avail':'badge-sold'}">${p.avail?'Disponible':'Agotado'}</span>
-            <div class="product-name">${p.name}</div>
-            <div class="product-desc">${p.desc}</div>
-            <div class="product-price">${p.price} <small>MXN</small></div>
-            <a class="btn-wa-sm${p.avail?'':' sold'}"
-              ${p.avail?`href="${CS.wa(msg)}" target="_blank"`:'href="#"'}>
-              <i class="fab fa-whatsapp"></i> ${p.avail?'Comprar':'Agotado'}
-            </a>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-body">
+              ${showGame ? `<div class="pcard-game-tag">${p.gameEmoji} ${p.gameName}</div><br>` : ''}
+              <span class="${p.avail?'pcard-avail':'pcard-sold'}">${p.avail?'Disponible':'Agotado'}</span>
+              <div class="pcard-name">${p.name}</div>
+              <div class="pcard-desc">${p.desc}</div>
+              <div class="pcard-price">${p.price} <small>MXN</small></div>
+              <a class="btn-wa-sm${p.avail?'':' sold'}"
+                ${p.avail?`href="${CS.wa(msg)}" target="_blank"`:'href="#"'}
+                style="background:rgba(37,211,102,0.85);backdrop-filter:blur(4px);">
+                <i class="fab fa-whatsapp"></i> ${p.avail?'Comprar':'Agotado'}
+              </a>
+            </div>
           </div>
         </div>`;
     }).join('');

@@ -163,6 +163,52 @@
       text-align:center; position:relative; overflow:hidden;
     }
     .cta-banner::before { content:''; position:absolute; top:-50%; left:50%; transform:translateX(-50%); width:400px; height:400px; border-radius:50%; background:radial-gradient(ellipse,rgba(0,229,255,0.08) 0%,transparent 70%); pointer-events:none; }
+
+    /* ---- Tarjetas "Elige tu juego" con imagen de fondo ---- */
+    .jcard {
+      position: relative;
+      height: 200px;
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      border: 1.5px solid rgba(255,255,255,0.06);
+      transition: transform 0.28s, border-color 0.28s, box-shadow 0.28s;
+    }
+    .jcard:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(0,229,255,0.45);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.55);
+    }
+    .jcard-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform 0.4s;
+    }
+    .jcard:hover .jcard-bg { transform: scale(1.07); }
+    .jcard-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.88) 100%);
+    }
+    .jcard-body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px 18px 18px;
+    }
+    .jcard-name {
+      font-family: var(--font-head); font-size: 1.05rem; font-weight: 800;
+      color: #fff; margin-bottom: 3px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .jcard-sub  { font-size: 0.7rem; color: rgba(255,255,255,0.62); margin-bottom: 8px; line-height:1.4; }
+    .jcard-count {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700;
+      color: var(--cyan);
+      background: rgba(0,229,255,0.12); border: 1px solid rgba(0,229,255,0.28);
+      border-radius: 20px; padding: 3px 10px;
+      transition: background 0.2s;
+    }
+    .jcard:hover .jcard-count { background: rgba(0,229,255,0.22); }
   </style>
 </head>
 <body>
@@ -195,7 +241,7 @@
           </div>
           <div class="divider"></div>
           <div>
-            <div class="hero-stat-num" style="color:var(--green)">‹30m</div>
+            <div class="hero-stat-num" style="color:var(--green)">10-30m</div>
             <div class="hero-stat-label">Tiempo de entrega</div>
           </div>
         </div>
@@ -221,8 +267,8 @@
     <div class="row g-4">
       <div class="col-sm-6 col-lg-3"><div class="step-card fade-up fade-up-1"><div class="step-num">01</div><div class="step-icon">🔍</div><div class="step-title">Elige tu producto</div><div class="step-desc">Navega el catálogo, filtra por juego y encuentra lo que buscas.</div></div></div>
       <div class="col-sm-6 col-lg-3"><div class="step-card fade-up fade-up-2"><div class="step-num">02</div><div class="step-icon">💬</div><div class="step-title">Escríbenos</div><div class="step-desc">Haz clic en "Comprar" y se abre WhatsApp con tu pedido ya escrito.</div></div></div>
-      <div class="col-sm-6 col-lg-3"><div class="step-card fade-up fade-up-3"><div class="step-num">03</div><div class="step-icon">💳</div><div class="step-title">Realiza el pago</div><div class="step-desc">OXXO, SPEI, CoDi o PayPal. Te enviamos los datos al momento.</div></div></div>
-      <div class="col-sm-6 col-lg-3"><div class="step-card fade-up fade-up-4"><div class="step-num">04</div><div class="step-icon">🚀</div><div class="step-title">Recibe tu producto</div><div class="step-desc">Entregamos en menos de 30 minutos tras confirmar el pago.</div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="step-card fade-up fade-up-3"><div class="step-num">03</div><div class="step-icon">💳</div><div class="step-title">Realiza el pago</div><div class="step-desc">Crypto, depósito OXXO o transferencia. Te enviamos los datos al momento.</div></div></div>
+      <div class="col-sm-6 col-lg-3"><div class="step-card fade-up fade-up-4"><div class="step-num">04</div><div class="step-icon">🚀</div><div class="step-title">Recibe tu producto</div><div class="step-desc">Entregamos entre 10 y 30 minutos tras confirmar el pago.</div></div></div>
     </div>
   </div>
 </section>
@@ -333,20 +379,29 @@
   const gamesEl = document.getElementById('gamesGrid');
   GAMES.forEach((g,i) => {
     const total = g.categories.reduce((a,c)=>a+c.products.length,0);
+    const imgUrl = GAME_IMGS[g.id];
     gamesEl.innerHTML += `
       <div class="col-6 col-md-4">
-        <a href="catalogo.html?juego=${g.id}" class="cs-card d-block text-decoration-none p-4 fade-up fade-up-${(i%4)+1}">
-          <div style="font-size:2.4rem;margin-bottom:12px">${g.emoji}</div>
-          <div style="font-family:var(--font-head);font-size:1rem;font-weight:800;color:var(--text);margin-bottom:6px">${g.name}</div>
-          <div style="font-size:0.76rem;color:var(--muted);margin-bottom:12px">${g.tagline}</div>
-          <div style="font-family:var(--font-ui);font-size:0.73rem;font-weight:700;color:var(--cyan)">${total} productos →</div>
+        <a href="catalogo.html?juego=${g.id}" class="jcard fade-up fade-up-${(i%4)+1}">
+          <div class="jcard-bg" style="background:linear-gradient(135deg,${g.color},${g.color2});">
+            ${imgUrl ? `<img src="${imgUrl}" alt="${g.name}"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.65;mix-blend-mode:luminosity;"
+              onerror="this.style.display='none'"/>` : ''}
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;opacity:0.25">${g.emoji}</div>
+          </div>
+          <div class="jcard-overlay"></div>
+          <div class="jcard-body">
+            <div class="jcard-name">${g.name}</div>
+            <div class="jcard-sub">${g.tagline}</div>
+            <div class="jcard-count">${total} productos <i class="fas fa-arrow-right" style="font-size:0.55rem"></i></div>
+          </div>
         </a>
       </div>`;
   });
 
   // Features
   [
-    {icon:'⚡',title:'Entrega rápida',      desc:'Menos de 30 minutos en la mayoría de los pedidos.'},
+    {icon:'⚡',title:'Entrega rápida',      desc:'Entre 10 y 30 minutos en la mayoría de los pedidos.'},
     {icon:'🔒',title:'Pagos seguros',       desc:'Verificamos tu pago antes de entregar cualquier producto.'},
     {icon:'💬',title:'Soporte real',        desc:'Atención personalizada vía WhatsApp, 7 días a la semana.'},
     {icon:'💸',title:'Precios competitivos',desc:'Comparamos precios constantemente para que siempre ahorres.'},
@@ -367,10 +422,10 @@
 
   // Testimonials
   [
-    {text:'Compré 800 Robux y los recibí en menos de 10 minutos. El trato súper amable y el precio mejor que en cualquier otro lado.',  author:'Miguel A.',  game:'Roblox',   stars:5},
-    {text:'Ya van 3 veces que compro cuentas de Fortnite con ellos. Siempre cumplen y solucionan cualquier problema rapidísimo.',       author:'Karla M.',   game:'Fortnite',  stars:5},
-    {text:'Dudé al principio pero me mandaron screenshots antes de pagar. Cuenta de Valorant Platino perfecta. Super recomendado.',     author:'Jesús R.',   game:'Valorant',  stars:5},
-    {text:'Los Diamonds de Free Fire llegaron al instante. Solo mandas el ID y listo. Proceso muy sencillo y precio justo.',            author:'Andrea L.',  game:'Free Fire', stars:5},
+    {text:'Compré 800 Robux y los recibí en menos de 10 minutos. El trato súper amable y el precio mejor que en cualquier otro lado.',  author:'Miguel A.',  game:'Roblox',   stars:2},
+    {text:'Ya van 3 veces que compro cuentas de Fortnite con ellos. Siempre cumplen y solucionan cualquier problema rapidísimo.',       author:'Karla M.',   game:'Fortnite',  stars:2},
+    {text:'Dudé al principio pero me mandaron screenshots antes de pagar. Cuenta de Valorant Platino perfecta. Super recomendado.',     author:'Jesús R.',   game:'Valorant',  stars:4},
+    {text:'Los Diamonds de Free Fire llegaron al instante. Solo mandas el ID y listo. Proceso muy sencillo y precio justo.',            author:'Andrea L.',  game:'Free Fire', stars:4},
   ].forEach((t,i) => {
     document.getElementById('testGrid').innerHTML += `
       <div class="col-md-6 col-lg-3">
