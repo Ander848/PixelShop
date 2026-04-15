@@ -54,7 +54,7 @@ const CS = {
               </p>
               <a href="${CS.wa('Hola CorialStore! 👋')}" target="_blank"
                 class="btn-wa mt-3 d-inline-flex" style="font-size:0.85rem;padding:9px 20px">
-                <i class="fab fa-whatsapp"></i> Escribirnos
+                <i class="fab fa-whatsapp"></i> Escríbenos
               </a>
             </div>
             <div class="col-6 col-lg-2">
