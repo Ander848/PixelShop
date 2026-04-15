@@ -85,7 +85,7 @@ const CS = {
             </div>
           </div>
           <div class="cs-footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-            <span>© 2025 CorialStore — Todos los derechos reservados</span>
+            <span>© 2026 CorialStore — Todos los derechos reservados</span>
             <span style="font-size:0.72rem;opacity:0.7">No afiliado con Roblox, Epic Games, Garena, Mojang ni Riot Games.</span>
           </div>
         </div>
